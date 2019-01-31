@@ -64,3 +64,5 @@ cors = seq(.1, 1-1e-5, length.out = 100)
 ```
 
 ## How does correlation affect confidence intervals? Try to provide a reason for why this occurs.
+
+edit 2
