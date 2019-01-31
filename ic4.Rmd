@@ -50,7 +50,9 @@ cors = seq(.1, 1-1e-5, length.out = 100)
 ```
 
 ## What is the the marked line in `generate.data` doing? Why did I multiply by some matrix?
+Edit 1.
 
+zz
 ## Running the simulation and plotting
 
 ```{r eval-and-plot}
