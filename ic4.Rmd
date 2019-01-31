@@ -1,0 +1,66 @@
+---
+title: "In-class 4: Correlated Predictors"
+author: "[Your name(s) here!]"
+date: "31 January 2019"
+output: pdf_document
+---
+
+## Instructions
+
+1. Rename this document with your student ID (not the 10-digit number, your IU username, e.g. `dajmcdon`). Include your buddy if you are working together.
+2. Examine the function below called `generate.data`.
+3. Answer the question about the marked line about `X`.
+4. Fill in the missing bits in the `intervals` function.
+5. In part 3, call the function `intervals` 10 times in a loop. Each time, save the output.
+6. Plot the average __width__ of the CI against `cors`.
+
+
+## Functions to examine and complete
+
+```{r functions-to-create}
+# This function generates Y, X1, and X2
+## Inputs: n, the number of data points
+##         cor, the correlation between X1 and X2
+## Outputs: a data frame
+generate.data <- function(n, cor){
+  epsilon = rnorm(n)
+  ## See the question below about X in the following line
+  X = matrix(rnorm(2*n),nrow=n) %*% chol(matrix(c(1, cor, cor,1), 2, 2))
+  beta = c(3, 2, 1)
+  Y = cbind(1, X) %*% beta + epsilon
+  df = data.frame(Y, X)
+  return(df)
+}
+## This function finds confidence interval widths 
+## for the Linear model
+## Inputs: n, the number of data points
+##         cor, the correlation between X1 and X2
+## Outputs: avg, the average width of the confidence 
+##               intervals for the regression
+intervals <- function(n, cor){
+  df = generate.data(n, cor)
+  mdl = lm(Y~X1+X2, data=df)
+  itvals =  ## Get the confidences intervals for the bhats (95%)
+  widths =  ## Find the width of each interval
+  avg = mean(widths[-1]) ## get the average width, ignore intercept
+  return(avg)
+}
+n = 250
+cors = seq(.1, 1-1e-5, length.out = 100)
+```
+
+## What is the the marked line in `generate.data` doing? Why did I multiply by some matrix?
+
+## Running the simulation and plotting
+
+```{r eval-and-plot}
+## preallocate a space to store the interval widths
+
+## write a loop to calculate the average width for each value of cors
+
+## plot cors (x-axis) vs. average widths (y-axis)
+##    label your axes nicely
+##    make the y-axis on the log scale
+```
+
+## How does correlation affect confidence intervals? Try to provide a reason for why this occurs.
